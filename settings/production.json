@@ -1,0 +1,9 @@
+{
+  "AWS": {
+    "accessKeyId" : "AKIAI7LQ76FMCPO6OVPA",
+    "secretAccessKey" : "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"
+  },
+  "public" : {
+    "bucketName" : "newsfilter-production"
+  }
+}
