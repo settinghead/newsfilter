@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # IP or URL of the server you want to deploy to
-APP_HOST=newsfilter.com
+APP_HOST=viral.settinghead.info
 
 # Uncomment this if your host is an EC2 instance
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
