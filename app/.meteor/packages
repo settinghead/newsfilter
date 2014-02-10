@@ -22,3 +22,5 @@ telescope-i18n
 fast-render
 spin
 accounts-facebook
+feedcrawler
+kue

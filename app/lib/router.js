@@ -31,6 +31,7 @@ hasCompletedProfile
 
 PostsListController
 PostPageController
+SourcesListController
 
 ---------------------------------------------------------------
 #                             Routes                          #
@@ -239,6 +240,7 @@ if(Meteor.isClient){
     'user_edit',
     'user_profile',
     'all-users',
+    'sources_list',
     'logs'
   ]});
 
@@ -249,7 +251,7 @@ if(Meteor.isClient){
   Router.before(filters.canPost, {only: ['posts_pending', 'comment_reply', 'post_submit']});
   Router.before(filters.canEditPost, {only: ['post_edit']});
   Router.before(filters.canEditComment, {only: ['comment_edit']});
-  Router.before(filters.isAdmin, {only: ['posts_pending', 'all-users', 'settings', 'categories', 'toolbox', 'logs']});
+  Router.before(filters.isAdmin, {only: ['posts_pending', 'all-users', 'settings', 'categories', 'toolbox', 'logs', 'sources']});
 
   // After Hooks
 
@@ -267,6 +269,24 @@ if(Meteor.isClient){
 //--------------------------------------------------------------------------------------------------//
 //------------------------------------------- Controllers ------------------------------------------//
 //--------------------------------------------------------------------------------------------------//
+
+
+SourcesListController = FastRender.RouteController.extend({
+  template:'sources_list',
+  waitOn: function () {
+
+    return [
+      Meteor.subscribe('sources'),
+    ]
+  },
+  data: function () {
+    var sources = Sources.find({});
+  
+    return {
+      sourcesList: sources
+    }
+  }    
+});
 
 
 // Controller for all posts lists
@@ -408,10 +428,24 @@ UserPageController = FastRender.RouteController.extend({
 
 Router.map(function() {
 
+  this.route('sources_list', {
+    path: '/sources',
+    controller: SourcesListController
+  });
+
+  this.route('sources_add', {
+    path: '/sources/add',
+    data: function(){
+      return {
+        _id: "http://www.nytimes.com"
+      };
+    }
+  });
+
   // -------------------------------------------- Post Lists -------------------------------------------- //
 
   // Top
-
+  
   this.route('posts_top', {
     path: '/',
     controller: PostsListController

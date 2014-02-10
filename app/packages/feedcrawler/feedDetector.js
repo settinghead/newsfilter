@@ -1,0 +1,5 @@
+FeedDetector = {
+  getFromHtml: function(html) {
+    
+  }
+};

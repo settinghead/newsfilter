@@ -197,3 +197,11 @@ Meteor.publish('searches', function(limit) {
   }
   return [];
 });
+
+Meteor.publish('sources', function(){
+  if (isAdminById(this.userId)) {
+    return Sources.find();
+  } else {
+    return [];
+  }
+});

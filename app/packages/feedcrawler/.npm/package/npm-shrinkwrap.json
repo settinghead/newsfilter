@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "feedparser": {
+      "version": "0.16.5",
+      "dependencies": {
+        "sax": {
+          "version": "0.5.8"
+        },
+        "addressparser": {
+          "version": "0.1.3"
+        },
+        "array-indexofobject": {
+          "version": "0.0.1"
+        },
+        "readable-stream": {
+          "version": "1.0.25",
+          "dependencies": {
+            "string_decoder": {
+              "version": "0.10.25"
+            }
+          }
+        },
+        "resanitize": {
+          "version": "0.3.0",
+          "dependencies": {
+            "validator": {
+              "version": "1.5.1"
+            }
+          }
+        }
+      }
+    }
+  }
+}

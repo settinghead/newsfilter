@@ -1,0 +1,32 @@
+<template name="sources_add">
+  <div class="grid">
+  <form class="grid-block form-horizontal">
+    <div class="control-group">
+      <label class="control-label">{{i18n "URL"}}</label>
+      <div class="controls"><input id="url" type="text" value="{{_id}}" placeholder="e.g. http://www.nytimes.com" /></div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">{{i18n "Title"}}</label>
+      <div class="controls"><input id="title" type="text" value="{{title}}" placeholder="e.g. Daily Timez" /></div>
+    </div>
+    {{#each links}}
+    {{> feed_link}}
+    {{/each}}
+    <div class="form-actions">
+      <input type="submit" value="{{i18n "Submit"}}" />
+    </div>
+  </form>
+  </div>
+</template>
+
+<template name="feed_link">
+  <div class="control-group">
+    <label class="control-label">Feed Entity</label>
+    <div class="controls">
+      <input class="feed-url half" type="text" value="{{url}}" placeholder="e.g. http://www.nytimes.com" />
+      <label class="checkbox inline">
+        <input class="feed-select" type="checkbox" />Pick 
+      </label>
+      </div>
+  </div>
+</template>

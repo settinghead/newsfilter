@@ -12,7 +12,13 @@
       "iron-router": {},
       "nprogress": {},
       "fast-render": {},
-      "spin": {}
+      "spin": {},
+      "feedcrawler": {
+        "path": "packages/feedcrawler"
+      },
+      "kue": {
+        "path": "packages/kue"
+      }
     },
     "packages": {
       "momentjs": {
@@ -54,6 +60,12 @@
         "git": "https://github.com/SachaG/meteor-spin.git",
         "tag": "v0.2.2",
         "commit": "3f655f0016228e4195acc784c45d3e3a247dc39f"
+      },
+      "feedcrawler": {
+        "path": "packages/feedcrawler"
+      },
+      "kue": {
+        "path": "packages/kue"
       }
     }
   }

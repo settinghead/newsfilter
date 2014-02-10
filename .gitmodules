@@ -1,0 +1,3 @@
+[submodule "app/packages/kue"]
+	path = app/packages/kue
+	url = https://github.com/settinghead/kue-meteor
