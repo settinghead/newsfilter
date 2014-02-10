@@ -34,6 +34,7 @@ Template.sources_add.events({
   'click input[type=submit]': function(e, instance){
     e.preventDefault();
     Sources.insert(this);
+    Router.go("/sources");
   }
 });
 
