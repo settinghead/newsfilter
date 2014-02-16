@@ -12,23 +12,72 @@
 	"folders":
 	[
 		{
-			"path":"app/packages",
-			"folder_exclude_patterns":["collection-api","blocking","nprogress","meteor-file","knox","imagemagick-native","imagemagick","connect","bootstrap-3","aws-sdk","apm","accounts-ui-bootstrap-3","GraphicsMagick","iron-router","jquery-ui","meteor-profiler","multiselect","smart-collections","*/.build","*/.npm","crypto-base","crypto-md5","database-forms","fast-render","mailchimp","momentjs","rss","spin","telescope-i18n"]
+			"folder_exclude_patterns":
+			[
+				"collection-api",
+				"blocking",
+				"nprogress",
+				"meteor-file",
+				"knox",
+				"imagemagick-native",
+				"imagemagick",
+				"connect",
+				"bootstrap-3",
+				"aws-sdk",
+				"apm",
+				"accounts-ui-bootstrap-3",
+				"GraphicsMagick",
+				"iron-router",
+				"jquery-ui",
+				"meteor-profiler",
+				"multiselect",
+				"smart-collections",
+				"*/.build",
+				"*/.npm",
+				"crypto-base",
+				"crypto-md5",
+				"database-forms",
+				"fast-render",
+				"mailchimp",
+				"momentjs",
+				"rss",
+				"spin",
+				"telescope-i18n"
+			],
+			"follow_symlinks": true,
+			"path": "app/packages"
 		},
 		{
-			"path":"app",
-			"folder_exclude_patterns":[".meteor","packages"]
+			"folder_exclude_patterns":
+			[
+				".meteor",
+				"packages"
+			],
+			"follow_symlinks": true,
+			"path": "app"
 		},
 		{
+			"follow_symlinks": true,
+			"path": "workers"
+		},
+		{
+			"follow_symlinks": true,
 			"path": "scripts"
 		},
 		{
-			"path":"test"
+			"follow_symlinks": true,
+			"path": "test"
 		},
-    {
-      "path":".",
-      "folder_exclude_patterns":["app","scripts","test"]
-    }
+		{
+			"folder_exclude_patterns":
+			[
+				"app",
+				"scripts",
+				"test"
+			],
+			"follow_symlinks": true,
+			"path": "."
+		}
 	],
 	"settings":
 	{

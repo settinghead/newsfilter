@@ -6,7 +6,16 @@
   <div class="sources grid list">
   <ul>
     {{#each sources}}
-      <li>{{_id}} <button data-id="{{_id}}" class="delete btn btn-primary">Delete</button> </li>
+      <li><a href="{{_id}}" target="_blank">{{_id}}</a>
+      <section>
+        <ul>
+          {{#each links}}
+          <li>{{url}} {{selected}}</li>
+          {{/each}}
+        </ul>
+      </section>
+      <button data-id="{{_id}}" class="delete btn btn-primary">Delete</button>
+      </li>
     {{/each}}
   </ul>
   </div>

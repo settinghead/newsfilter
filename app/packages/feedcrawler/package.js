@@ -1,11 +1,15 @@
 Npm.depends({
-  'feedparser': '0.16.5'
+  'feedparser': '0.16.5',
+  'cheerio': '0.13.1'
 });
 
+
+
 Package.on_use(function (api) {
-  // api.use('accounts-password');
-  api.add_files('feedDetector.js', ["server", "client"]);
-  api.export && api.export(['FeedDetector'], ["server", "client"]);
+  api.use('underscore', 'server');
+  api.use('coffeescript', 'server');
+  api.add_files('feedDetector.js', ["server"]);
+  // api.export && api.export(['FeedDetector'], ["server", "client"]);
 });
 
 Package.on_test(function (api) {
