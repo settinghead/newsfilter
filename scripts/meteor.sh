@@ -82,6 +82,7 @@ forever start bundle/main.js > production.log
 popd
 pushd $APP_DIR/workers
 npm install
+mocha feedcrawler/test/
 forever start --killSignal SIGTERM app.js > production_workers.log
 popd
 ENDSSH
