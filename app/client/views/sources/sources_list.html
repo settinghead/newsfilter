@@ -6,7 +6,7 @@
   <div class="sources grid list">
   <ul>
     {{#each sources}}
-      <li>{{_id}}</li>
+      <li>{{_id}} <button data-id="{{_id}}" class="delete btn btn-primary">Delete</button> </li>
     {{/each}}
   </ul>
   </div>
