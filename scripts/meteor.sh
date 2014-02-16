@@ -12,7 +12,6 @@ APP_NAME=newsfilter
 ROOT_URL=http://$APP_HOST
 PORT=3000
 APP_DIR=/var/www/$APP_NAME
-WORKER_DIR=/var/www/$APP_NAME_worker
 METEOR_SETTINGS=`cat $DIR/../settings/production.json`
 MONGO_URL=mongodb://localhost:27017/$APP_NAME
 SSH_HOST="ubuntu@$APP_HOST" SSH_OPT=""
@@ -55,7 +54,7 @@ scp $SSH_OPT ../settings/production.json $SSH_HOST:/tmp/ &&
 rm bundle.tgz &&
 rm worker.tar.gz&&
 echo Deploying...
-ssh $SSH_OPT $SSH_HOST PORT=$PORT MONGO_URL=$MONGO_URL ROOT_URL=$ROOT_URL APP_DIR=$APP_DIR WORKER_DIR=$WORKER_DIR 'bash -s' <<'ENDSSH'
+ssh $SSH_OPT $SSH_HOST PORT=$PORT MONGO_URL=$MONGO_URL ROOT_URL=$ROOT_URL APP_DIR=$APP_DIR 'bash -s' <<'ENDSSH'
 if [ ! -d "$APP_DIR" ]; then
 sudo mkdir -p $APP_DIR
 sudo chown -R ubuntu:ubuntu $APP_DIR
@@ -64,7 +63,7 @@ pushd $APP_DIR
 forever stopall
 rm -rf bundle
 tar xfz /tmp/bundle.tgz -C $APP_DIR
-tar xfz /tmp/worker.tar.gz -C $WORKER_DIR
+tar xfz /tmp/worker.tar.gz -C $APP_NAME
 cp /tmp/production.json $APP_DIR/
 rm /tmp/bundle.tgz
 sudo chown -R ubuntu:ubuntu $APP_DIR
@@ -78,7 +77,7 @@ popd
 export METEOR_SETTINGS=`cat production.json`
 forever start bundle/main.js > production.log
 popd
-pushd $WORKER_DIR/workers
+pushd $APP_DIR/workers
 npm install
 forever start app.js > production_workers.log
 popd
