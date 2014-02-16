@@ -21,3 +21,10 @@ if (cluster.isMaster) {
     done();
   });
 }
+
+process.once( 'SIGTERM', function ( sig ) {
+  jobs.shutdown(function(err) {
+    console.log( 'Kue is shut down.', err||'' );
+    process.exit( 0 );
+  }, 5000 );
+});

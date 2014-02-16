@@ -47,11 +47,12 @@ cd ../app
 meteor list
 mrt install
 $METEOR_CMD bundle bundle.tgz &&
-tar -zcvf worker.tar.gz ../workers &&
 scp $SSH_OPT bundle.tgz $SSH_HOST:/tmp/ &&
-scp $SSH_OPT worker.tar.gz $SSH_HOST:/tmp/ &&
 scp $SSH_OPT ../settings/production.json $SSH_HOST:/tmp/ &&
 rm bundle.tgz &&
+cd ../
+tar -zcvf ./worker.tar.gz ./workers &&
+scp $SSH_OPT worker.tar.gz $SSH_HOST:/tmp/ &&
 rm worker.tar.gz&&
 echo Deploying...
 ssh $SSH_OPT $SSH_HOST PORT=$PORT MONGO_URL=$MONGO_URL ROOT_URL=$ROOT_URL APP_DIR=$APP_DIR 'bash -s' <<'ENDSSH'
@@ -63,7 +64,7 @@ pushd $APP_DIR
 forever stopall
 rm -rf bundle
 tar xfz /tmp/bundle.tgz -C $APP_DIR
-tar xfz /tmp/worker.tar.gz -C $APP_NAME
+tar xfz /tmp/worker.tar.gz -C $APP_DIR
 cp /tmp/production.json $APP_DIR/
 rm /tmp/bundle.tgz
 sudo chown -R ubuntu:ubuntu $APP_DIR
