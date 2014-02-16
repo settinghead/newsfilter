@@ -85,9 +85,9 @@ npm install
 forever start --killSignal SIGTERM app.js > production_workers.log
 popd
 ENDSSH
-LAST_STATUS = $?
-if [[ $LAST_STATUS != 0 ]]; then
-  exit $LAST_STATUS
+last_status=$?
+if [[ $last_status != 0 ]]; then
+  exit $last_status
 else
   echo Your app is deployed and serving on: $ROOT_URL
 fi
