@@ -30,7 +30,7 @@ apt-get update
 apt-get install -y python-software-properties
 add-apt-repository ppa:chris-lea/node.js
 apt-get update
-apt-get install -y build-essential nodejs mongodb imagemagick libmagick++-dev git graphicsmagick
+apt-get install -y build-essential nodejs mongodb imagemagick libmagick++-dev git graphicsmagick redis-server
 npm install -g forever
 curl https://install.meteor.com/ | sh
 npm install -g meteorite
