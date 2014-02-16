@@ -80,7 +80,7 @@ forever start bundle/main.js > production.log
 popd
 pushd $APP_DIR/workers
 npm install
-forever start app.js > production_workers.log
+forever start --killSignal SIGTERM app.js > production_workers.log
 popd
 ENDSSH
 LAST_STATUS = $?
