@@ -47,7 +47,7 @@ cd ../app
 meteor list
 mrt install
 $METEOR_CMD bundle bundle.tgz &&
-tar -zcvf worker.tar.gz ../worker &&
+tar -zcvf worker.tar.gz ../workers &&
 scp $SSH_OPT bundle.tgz $SSH_HOST:/tmp/ &&
 scp $SSH_OPT worker.tar.gz $SSH_HOST:/tmp/ &&
 scp $SSH_OPT ../settings/production.json $SSH_HOST:/tmp/ &&
