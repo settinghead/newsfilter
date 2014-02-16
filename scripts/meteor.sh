@@ -37,6 +37,7 @@ npm install -g forever
 curl https://install.meteor.com/ | sh
 npm install -g meteorite
 npm install -g coffee-script
+npm install -g mocha
 mkdir /home/ubuntu/tmp
 chown -R ubuntu:ubuntu /home/ubuntu/tmp
 ENDSSH
@@ -58,6 +59,7 @@ scp $SSH_OPT worker.tar.gz $SSH_HOST:/tmp/ &&
 rm worker.tar.gz&&
 echo Deploying...
 ssh $SSH_OPT $SSH_HOST PORT=$PORT MONGO_URL=$MONGO_URL ROOT_URL=$ROOT_URL APP_DIR=$APP_DIR 'bash -s' <<'ENDSSH'
+set -e
 if [ ! -d "$APP_DIR" ]; then
 sudo mkdir -p $APP_DIR
 sudo chown -R ubuntu:ubuntu $APP_DIR
