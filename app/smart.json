@@ -17,8 +17,5 @@
     "kue":{
       "path":"packages/kue"
     }
-    "feedcrawler":{
-      "path":"packages/feedcrawler"
-    }
   }
 }
