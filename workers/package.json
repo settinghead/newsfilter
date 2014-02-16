@@ -1,5 +1,16 @@
 {
   "dependencies": {
-    "kue" : "0.6.2"
+    "kue" : "~0.6.2",
+    "feedparser" : "~0.16.6",
+    "monk" : "~0.7.1",
+    "underscore" : "~1.6.0",
+    "async" : "~0.2.10",
+    "q" : "~1.0.0",
+    "request":"~2.33.0"
+  },
+  "devDependencies":{
+    "mocha":"*",
+    "nock":"*",
+    "chai":"*"
   }
 }

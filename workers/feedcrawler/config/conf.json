@@ -1,0 +1,19 @@
+{
+  "default":{
+    "dbHost":"localhost",
+    "dbPort":"27017",
+    "dbName":"newwfilter"
+  },
+  "test":{
+    "dbName":"newsfilter_test"
+  },
+  "development":{
+
+  },
+  "staging":{
+
+  },
+  "production":{
+
+  }
+}

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # IP or URL of the server you want to deploy to
 APP_HOST=viral.settinghead.info
@@ -26,6 +27,7 @@ setup )
 echo Preparing the server...
 echo Get some coffee, this will take a while.
 ssh $SSH_OPT $SSH_HOST DEBIAN_FRONTEND=noninteractive 'sudo -E bash -s' <<'ENDSSH'
+set -e
 apt-get update
 apt-get install -y python-software-properties
 add-apt-repository ppa:chris-lea/node.js
@@ -84,7 +86,7 @@ forever start --killSignal SIGTERM app.js > production_workers.log
 popd
 ENDSSH
 LAST_STATUS = $?
-if [ $LAST_STATUS -ne 0 ]; then
+if [[ $LAST_STATUS != 0 ]]; then
   exit $LAST_STATUS
 else
   echo Your app is deployed and serving on: $ROOT_URL
