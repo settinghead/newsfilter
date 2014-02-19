@@ -3,11 +3,10 @@ var nock = require('nock'),
     http = require('http'),
     path = require('path'),
     config = require('../config/config')('test'),
+    posts = config.getPosts(),
     should = require('chai').should,
     expect = require('chai').expect,
-    monk = require('monk')(config.dbConnStr),
-    posts = monk.get('posts'),
-    feedcrawler = require('../feedcrawler.js')(monk);
+    feedcrawler = require('../feedcrawler.js');
 
 describe('Feed Crawler', function () {
   beforeEach(function(done){
@@ -16,7 +15,7 @@ describe('Feed Crawler', function () {
     done();
   });
 
-  it('Parses a feed URL', function(done){
+  it('parses a feed URL', function(done){
     var viralFeed = fs.readFileSync(path.join(__dirname, 'fixtures/viralnova.feed.xml'));
     nock('http://www.viralnova.com').
       get('/feed').once().reply('200', viralFeed);
@@ -28,4 +27,5 @@ describe('Feed Crawler', function () {
       });
     });
   });
+
 });

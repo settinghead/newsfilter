@@ -1,11 +1,12 @@
 var kue = require('kue')
   , cluster = require('cluster')
-  , jobs = kue.createQueue();
-
-var cluster = require('cluster');
-var numCPUs = require('os').cpus().length;
+  , jobs = kue.createQueue(),
+    cluster = require('cluster'),
+    numCPUs = require('os').cpus().length;
 
 if (cluster.isMaster) {
+
+  kue.app.listen(3001);
   // Fork workers.
   for (var i = 0; i < numCPUs; i++) {
     console.log('Worker', i , 'started.');
@@ -16,7 +17,7 @@ if (cluster.isMaster) {
     console.log('worker ' + worker.pid + ' died');
   });
 } else {
-  jobs.process('feed', function(job, done){
+  jobs.process('newsfilter/feed', function(job, done){
     console.log(job);
     done();
   });

@@ -17,7 +17,7 @@ Session.set('sessionId', Meteor.default_connection._lastSessionId);
 Meteor.subscribe('settings', function(){
   // runs once after settings have loaded
   Session.set('settingsLoaded',true);
-  analyticsInit();
+  // analyticsInit();
 });
 
 // Categories

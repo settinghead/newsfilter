@@ -24,4 +24,5 @@
         a._i.push([b, c, f])
     };
     a.__SV = 1.1
-})(document, window.mixpanel || []);
+});
+// (document, window.mixpanel || []);
