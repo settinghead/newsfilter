@@ -6,7 +6,7 @@ Template.sources_add.events
   "change #url": (e, instance) ->
     url = $(e.target).val()
     if url
-      @_id = url
+      @url = url
       $.get url, (response) =>
         $nodes = $(response.responseText)
         rssLinks = _.filter($nodes, (node) ->
@@ -28,7 +28,7 @@ Template.sources_add.events
 
   "click input[type=submit]": (e, instance) ->
     e.preventDefault()
-    Sources.insert this
+    Sources.insert @
     Router.go "/sources"
     return
 

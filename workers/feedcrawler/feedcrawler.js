@@ -3,12 +3,35 @@ var FeedParser = require('feedparser'),
     config = require('./config/config')('test'),
     posts = config.getPosts(),
     sources = config.getSources(),
-    async = require('async');
+    async = require('async'), 
+    _ = require('underscore');
 
 
 var processSource = function(sourceId, callback) { 
   var deferred = Q.defer();
-
+  sources.findOne({_id: sourceId}, function(err, source) {
+    var selectedLinks = _.filter(source.links, function(link){return link.selected});
+    async.map(selectedLinks, function(link, callback){
+      return processFeed(source._id, link.url, callback);
+    }, 
+    function(err, results){
+        if(callback){
+          callback(err, results);
+        }
+        else if(err){
+          deferred.reject(err);
+        }
+        else{
+          deferred.resolve(results);          
+        }
+    });
+  });
+  if(!callback){
+    return deferred.promise;
+  }
+  else{
+    callback();
+  }
 };
 
 var processFeed = function(sourceId, url, callback) {
@@ -89,3 +112,4 @@ var processFeed = function(sourceId, url, callback) {
 };
 
 module.exports.processFeed = processFeed;
+module.exports.processSource = processSource;
