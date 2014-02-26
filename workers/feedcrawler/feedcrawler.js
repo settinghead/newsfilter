@@ -77,6 +77,7 @@ var processFeed = function(sourceId, url, callback) {
             score: 0,
             inactive: false,
             status: 1,
+            sourceId: sourceId,
             url: item.origlink || item.link
         });
       }
@@ -84,13 +85,12 @@ var processFeed = function(sourceId, url, callback) {
   feedparser.on('end', function() {
     async.map(items,
       function(doc, callback){
-        posts.findOne({url: doc.url}, function(err, doc){
-          if(!doc){
+        posts.findOne({url: doc.url}, function(err, existingDoc){
+          if(!existingDoc){
             posts.insert(doc, {}, callback);
           }
           else {
-            console.log(doc);
-            callback();
+            callback(null, existingDoc);
           }
         });
       },

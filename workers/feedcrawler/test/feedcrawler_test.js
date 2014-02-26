@@ -8,14 +8,12 @@ var nock = require('nock'),
     should = require('chai').should,
     expect = require('chai').expect,
     feedcrawler = require('../feedcrawler.js'),
-    sourceId;
+    sourceId, 
+    viralFeed = fs.readFileSync(path.join(__dirname, 'fixtures/viralnova.feed.xml'));
 
 describe('Feed Crawler', function () {
   beforeEach(function(done){
     nock.disableNetConnect();
-    var viralFeed = fs.readFileSync(path.join(__dirname, 'fixtures/viralnova.feed.xml'));
-    nock('http://www.viralnova.com').
-      get('/feed').once().reply('200', viralFeed);
     posts.remove({}, function(){
       sources.remove({}, function(){
         sources.insert({
@@ -34,16 +32,33 @@ describe('Feed Crawler', function () {
   });
 
   it('parses a feed and stores posts', function(done){
+    nock('http://www.viralnova.com').get('/feed').once().reply('200', viralFeed);
     feedcrawler.processFeed(123, 'http://www.viralnova.com/feed').
       then(function(err, results){
-        posts.find({}, function(error, results){
+        posts.find({}, {fields:{sourceId: 1}}, function(error, results){
           expect(results.length).to.equal(10);
+          expect(results[0].sourceId).to.equal(123);
           done();
         });
       });
   });
 
+it('avoids duplicate posts', function(done){
+    nock('http://www.viralnova.com').get('/feed').twice().reply('200', viralFeed);
+    feedcrawler.processFeed(123, 'http://www.viralnova.com/feed').
+      then(function(err, results){
+        feedcrawler.processFeed(123, 'http://www.viralnova.com/feed').
+        then(function(err, results){
+          posts.find({}, function(error, results){
+            expect(results.length).to.equal(10);
+            done();
+          });
+        });
+      });
+  });
+
   it('parse a source and stores posts', function(done){
+    nock('http://www.viralnova.com').get('/feed').once().reply('200', viralFeed);
     feedcrawler.processSource(sourceId).then(function(err, results){
       posts.find({}, function(error, results){
           expect(results.length).to.equal(10);
