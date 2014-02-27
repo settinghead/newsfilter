@@ -12,10 +12,10 @@
     "fast-render": {},
     "spin": {},
     "feedcrawler": {
-      "path":"packages/feedcrawler"
+      "path": "packages/feedcrawler"
     },
-    "kue":{
-      "path":"packages/kue"
+    "kue": {
+      "path": "packages/kue"
     }
   }
 }

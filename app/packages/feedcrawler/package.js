@@ -1,7 +1,8 @@
 Npm.depends({
   'feedparser': '0.16.5',
   'cheerio': '0.13.1',
-  'kue': '0.6.2'
+  'kue': '0.6.2',
+  "winston": "0.7.2"
 });
 
 Package.on_use(function (api) {

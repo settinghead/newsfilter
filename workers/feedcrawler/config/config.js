@@ -1,5 +1,6 @@
 var conf = require('./conf.json'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    w = require('winston');
 
 module.exports = function(env) {
   env = env || process.env.NODE_ENV || 'development';
@@ -7,7 +8,7 @@ module.exports = function(env) {
       dbConnStr = result.dbHost + ':' + result.dbPort + '/' + result.dbName;
   var monk = require('monk')(dbConnStr);
 
-  console.log('Connected to', dbConnStr);
+  w.info('Connected to', dbConnStr);
 
   result.getPosts = function(){
     return monk.get('posts');

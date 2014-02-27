@@ -3,19 +3,20 @@ var kue = require('kue')
   , jobs = kue.createQueue(),
     cluster = require('cluster'),
     numCPUs = require('os').cpus().length,
-    feedCrawler = require('./feedcrawler/feedcrawler.js');
+    feedCrawler = require('./feedcrawler/feedcrawler.js'),
+    w = require('winston');
 
 if (cluster.isMaster) {
 
   kue.app.listen(3010);
   // Fork workers.
   for (var i = 0; i < numCPUs; i++) {
-    console.log('Worker', i , 'started.');
+    w.info('Worker', i , 'started.');
     cluster.fork();
   }
 
   cluster.on('death', function(worker) {
-    console.log('worker ' + worker.pid + ' died');
+    w.info('worker ' + worker.pid + ' died');
   });
 } else {
   jobs.process('newsfilter/source', function(job, done){
@@ -31,7 +32,7 @@ if (cluster.isMaster) {
 
 process.once( 'SIGTERM', function ( sig ) {
   jobs.shutdown(function(err) {
-    console.log( 'Kue is shut down.', err||'' );
+    w.info( 'Kue is shut down.', err||'' );
     process.exit( 0 );
   }, 5000 );
 });

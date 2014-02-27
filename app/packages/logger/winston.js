@@ -1,0 +1,1 @@
+W = Npm.require("winston");

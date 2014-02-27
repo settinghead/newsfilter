@@ -6,7 +6,8 @@
     "underscore" : "~1.6.0",
     "async" : "~0.2.10",
     "q" : "~1.0.0",
-    "request":"~2.33.0"
+    "request":"~2.33.0",
+    "winston":"~0.7.2"
   },
   "devDependencies":{
     "mocha":"*",

@@ -4,10 +4,11 @@ var FeedParser = require('feedparser'),
     posts = config.getPosts(),
     sources = config.getSources(),
     async = require('async'), 
-    _ = require('underscore');
+    _ = require('underscore'),
+    w = require('winston');
 
-
-var processSource = function(sourceId, callback) { 
+var processSource = function(sourceId, callback) {
+  w.info('Processing source ', sourceId, '...');
   var deferred = Q.defer();
   sources.findOne({_id: sourceId}, function(err, source) {
     var selectedLinks = _.filter(source.links, function(link){return link.selected});
@@ -19,6 +20,7 @@ var processSource = function(sourceId, callback) {
           callback(err, results);
         }
         else if(err){
+          w.error('Error occurred while processing source ', sourceId, ': ', err, '...');
           deferred.reject(err);
         }
         else{
@@ -35,10 +37,12 @@ var processSource = function(sourceId, callback) {
 };
 
 var processFeed = function(sourceId, url, callback) {
+  w.info('Processing feed ', url, '...');
   var req = request(url)
     , feedparser = new FeedParser({feedurl: url}),
      deferred = Q.defer(), items = [];
   req.on('error', function(error){
+    w.error('Error occurred while retrieving feed ', url, ': ', error);
     if(callback){
       callback(error);
     }
@@ -54,6 +58,7 @@ var processFeed = function(sourceId, url, callback) {
 
 
   feedparser.on('error', function(error){
+    w.error('Error occurred while parsing feed ', url, ': ', error);
     if(callback){
       callback(error);
     }
@@ -90,7 +95,7 @@ var processFeed = function(sourceId, url, callback) {
             posts.insert(doc, {}, callback);
           }
           else {
-            callback(null, existingDoc);
+            callback(err, existingDoc);
           }
         });
       },
