@@ -33,6 +33,10 @@ apt-get install -y python-software-properties
 add-apt-repository ppa:chris-lea/node.js
 apt-get update
 apt-get install -y build-essential nodejs mongodb imagemagick libmagick++-dev git graphicsmagick redis-server
+nginx=stable # use nginx=development for latest development version
+add-apt-repository -y ppa:nginx/$nginx
+apt-get update 
+apt-get install -y nginx
 npm install -g forever
 curl https://install.meteor.com/ | sh
 npm install -g meteorite
@@ -58,7 +62,7 @@ tar -zcvf ./worker.tar.gz ./workers &&
 scp $SSH_OPT worker.tar.gz $SSH_HOST:/tmp/ &&
 rm worker.tar.gz&&
 echo Deploying...
-ssh $SSH_OPT $SSH_HOST PORT=$PORT MONGO_URL=$MONGO_URL ROOT_URL=$ROOT_URL APP_DIR=$APP_DIR 'bash -s' <<'ENDSSH'
+ssh $SSH_OPT $SSH_HOST NODE_ENV=production PORT=$PORT MONGO_URL=$MONGO_URL ROOT_URL=$ROOT_URL APP_DIR=$APP_DIR 'bash -s' <<'ENDSSH'
 set -e
 if [ ! -d "$APP_DIR" ]; then
 sudo mkdir -p $APP_DIR
