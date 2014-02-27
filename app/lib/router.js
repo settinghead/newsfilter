@@ -437,7 +437,6 @@ Router.map(function() {
     path: '/sources/add',
     data: function(){
       return {
-        _id: "http://www.nytimes.com"
       };
     }
   });

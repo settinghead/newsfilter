@@ -2,11 +2,12 @@ var kue = require('kue')
   , cluster = require('cluster')
   , jobs = kue.createQueue(),
     cluster = require('cluster'),
-    numCPUs = require('os').cpus().length;
+    numCPUs = require('os').cpus().length,
+    feedCrawler = require('./feedcrawler/feedcrawler.js');
 
 if (cluster.isMaster) {
 
-  kue.app.listen(3001);
+  kue.app.listen(3010);
   // Fork workers.
   for (var i = 0; i < numCPUs; i++) {
     console.log('Worker', i , 'started.');
@@ -17,8 +18,13 @@ if (cluster.isMaster) {
     console.log('worker ' + worker.pid + ' died');
   });
 } else {
+  jobs.process('newsfilter/source', function(job, done){
+    feedCrawler.processSource(job.data.sourceId);
+    done();
+  });
+
   jobs.process('newsfilter/feed', function(job, done){
-    console.log(job);
+    feedCrawler.processFeed(job.data.sourceId, job.data.url);
     done();
   });
 }

@@ -7,6 +7,8 @@ module.exports = function(env) {
       dbConnStr = result.dbHost + ':' + result.dbPort + '/' + result.dbName;
   var monk = require('monk')(dbConnStr);
 
+  console.log('Connected to', dbConnStr);
+
   result.getPosts = function(){
     return monk.get('posts');
   }

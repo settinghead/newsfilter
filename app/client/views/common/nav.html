@@ -23,12 +23,12 @@
       </li>
       {{/if}}
       {{#if isAdmin}}
+      <li><a class="pending" href="/sources">{{i18n "Sources"}}</a></li>
+      <li><a class="pending" href="/pending">{{i18n "Pending"}}</a></li>
       <li class="dropdown">
         <a class="admin" href="/">{{i18n "Administration"}}</a>
         <div class="dropdown-menu">
           <ul role="menu" aria-labelledby="dLabel">
-            <li><a class="pending" href="/sources">{{i18n "Sources"}}</a></li>
-            <li><a class="pending" href="/pending">{{i18n "Pending"}}</a></li>
             <li><a class="users" href="/all-users">{{i18n "Users"}}</a></li>
             <li><a class="settings" href="/settings">{{i18n "Settings"}}</a></li>
             <li><a class="categories" href="/categories">{{i18n "Categories"}}</a></li>

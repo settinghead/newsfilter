@@ -2,13 +2,15 @@
   "default":{
     "dbHost":"localhost",
     "dbPort":"27017",
-    "dbName":"newwfilter"
+    "dbName":"newsfilter"
   },
   "test":{
     "dbName":"newsfilter_test"
   },
   "development":{
-
+    "dbHost":"localhost",
+    "dbPort":"3001",
+    "dbName":"meteor"
   },
   "staging":{
 

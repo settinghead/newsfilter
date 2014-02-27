@@ -7,7 +7,7 @@ Npm.depends({
 Package.on_use(function (api) {
   api.use('underscore', 'server');
   api.use('coffeescript', 'server');
-  api.add_files('feedDetector.js', ["server"]);
+  api.add_files('feedDetector.js', ["server", "client"]);
   // api.export && api.export(['FeedDetector'], ["server", "client"]);
 });
 

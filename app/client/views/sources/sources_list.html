@@ -5,16 +5,14 @@
 
   <div class="sources grid list">
   <ul>
-    {{#each sources}}
-      <li><a href="{{_id}}" target="_blank">{{_id}}</a>
-      <section>
-        <ul>
-          {{#each links}}
-          <li>{{url}} {{selected}}</li>
-          {{/each}}
-        </ul>
-      </section>
-      <button data-id="{{_id}}" class="delete btn btn-primary">Delete</button>
+    {{#each sourcesList}}
+      <li><a href="{{_id}}" target="_blank">{{title}}</a>
+      <ul>
+        {{#each links}}
+        <li>{{url}} {{#if selected}} <button data-url="{{url}}" data-source-id="{{../_id}}" class='refresh-source-url btn btn-primary inline'>Refresh</button>{{/if}}</li>
+       {{/each}}
+      </ul>
+      <button data-id="{{_id}}" class="delete-source btn btn-primary inline">Delete</button>
       </li>
     {{/each}}
   </ul>

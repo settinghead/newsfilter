@@ -1,6 +1,6 @@
 Template.sources_add.helpers links: ->
   Session.get "linksInvalidator"
-  @links
+  => @links
 
 Template.sources_add.events
   "change #url": (e, instance) ->
@@ -25,6 +25,8 @@ Template.sources_add.events
         @links = rssLinksUrls
         # invalidate so as to force an update on UI
         Session.set "linksInvalidator", Math.random()
+
+  "change #title" : (e, instance) -> @title = $(e.target).val()
 
   "click input[type=submit]": (e, instance) ->
     e.preventDefault()

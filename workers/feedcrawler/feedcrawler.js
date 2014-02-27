@@ -1,6 +1,6 @@
 var FeedParser = require('feedparser'),
     request = require('request'), Q = require('q'),
-    config = require('./config/config')('test'),
+    config = require('./config/config')(),
     posts = config.getPosts(),
     sources = config.getSources(),
     async = require('async'), 
@@ -35,7 +35,7 @@ var processSource = function(sourceId, callback) {
 };
 
 var processFeed = function(sourceId, url, callback) {
-  var req = request('http://www.viralnova.com/feed')
+  var req = request(url)
     , feedparser = new FeedParser({feedurl: url}),
      deferred = Q.defer(), items = [];
   req.on('error', function(error){
