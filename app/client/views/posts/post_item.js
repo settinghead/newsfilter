@@ -45,6 +45,9 @@ Template.post_item.helpers({
     var html_body=converter.makeHtml(this.body);
     return html_body.autoLink();
   },
+  pending: function(){
+    return this.status == STATUS_PENDING;
+  },
   ago: function(){
     // if post is approved show submission time, else show creation time. 
     time = this.status == STATUS_APPROVED ? this.submitted : this.createdAt;
@@ -112,6 +115,17 @@ Template.post_item.rendered = function(){
 };
 
 Template.post_item.events({
+  'click .approve-link': function(e, instance){
+    var post = this;
+    e.preventDefault();
+    if(!Meteor.user()){
+      Router.go('/signin');
+      throwError(i18n.t("Please log in first"));
+    }
+    Meteor.call('approvePost', post, function(error, result){
+      trackEvent("post approved", {'_id': post._id});
+    });
+  },
   'click .upvote-link': function(e, instance){
     var post = this;
     e.preventDefault();

@@ -27,6 +27,9 @@
 	font-weight: normal;
 	-webkit-font-smoothing: antialiased;
 }
+.icon-approve:before {
+  content: "\2713";
+}
 .icon-share:before {
 	content: "\73";
 }

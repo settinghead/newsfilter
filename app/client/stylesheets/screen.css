@@ -227,7 +227,9 @@ h3 {
   speak: none;
   font-weight: normal;
   -webkit-font-smoothing: antialiased; }
-
+.icon-approve:before {
+  content: "\2713";
+}
 /* line 30, ../sass/partials/_icons.scss */
 .icon-share:before {
   content: "\73"; }

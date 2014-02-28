@@ -17,6 +17,14 @@
     return item.downvoters && item.downvoters.indexOf(user._id) != -1
   }
 
+  var approveItem = function(collection, item) {
+    var result = collection.update({_id: item && item._id}, {
+      $set: {
+        status: STATUS_PENDING
+      }
+    });
+  }
+
   var upvoteItem = function(collection, item) {
     var user = Meteor.user(),
         votePower = getVotePower(user);
@@ -149,6 +157,9 @@
   }
   
   Meteor.methods({
+    approvePost: function(post, user){
+      return approveItem.call(this, Posts, post);
+    },
     upvotePost: function(post, user){
       return upvoteItem.call(this, Posts, post);
     },
