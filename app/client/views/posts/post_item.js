@@ -123,7 +123,12 @@ Template.post_item.events({
       throwError(i18n.t("Please log in first"));
     }
     Meteor.call('approvePost', post, function(error, result){
-      trackEvent("post approved", {'_id': post._id});
+      if(!error){
+        trackEvent("post approved", {'_id': post._id});        
+      }
+      else{
+        console.error(error);
+      }
     });
   },
   'click .upvote-link': function(e, instance){

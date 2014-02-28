@@ -20,7 +20,7 @@
   var approveItem = function(collection, item) {
     var result = collection.update({_id: item && item._id}, {
       $set: {
-        status: STATUS_PENDING
+        status: STATUS_APPROVED
       }
     });
   }
