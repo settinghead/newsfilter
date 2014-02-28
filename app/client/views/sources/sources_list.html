@@ -6,7 +6,7 @@
   <div class="sources grid list">
   <ul>
     {{#each sourcesList}}
-      <li><a href="{{_id}}" target="_blank">{{title}}</a>
+      <li><a href="{{url}}" target="_blank">{{title}}</a>
       <ul>
         {{#each links}}
         <li>{{url}} {{#if selected}} <button data-url="{{url}}" data-source-id="{{../_id}}" class='refresh-source-url btn btn-primary inline'>Refresh</button>{{/if}}</li>
