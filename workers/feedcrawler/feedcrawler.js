@@ -71,7 +71,7 @@ var processFeed = function(sourceId, url, callback) {
     var stream = this
       , meta = this.meta // **NOTE** the "meta" is always available in the context of the feedparser instance
       , item;
-      while(item = stream.read()){
+      while(item = stream.read()){  
           items.push({
             headline: item.title,
             body: item.description,
@@ -92,6 +92,7 @@ var processFeed = function(sourceId, url, callback) {
       function(doc, callback){
         posts.findOne({url: doc.url}, function(err, existingDoc){
           if(!existingDoc){
+            w.info('Creating post ', doc.url, '...');
             posts.insert(doc, {}, callback);
           }
           else {
@@ -100,6 +101,7 @@ var processFeed = function(sourceId, url, callback) {
         });
       },
       function(err, results){
+        w.info('Feed ', url, 'professing complete. ');
         if(callback){
           callback(err, results);
         }
