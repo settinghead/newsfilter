@@ -5,7 +5,8 @@ var FeedParser = require('feedparser'),
     sources = config.getSources(),
     async = require('async'), 
     _ = require('underscore'),
-    w = require('winston');
+    w = require('winston'),
+    shortid = require('shortid');
 
 var processSource = function(sourceId, callback) {
   w.info('Processing source ', sourceId, '...');
@@ -93,6 +94,7 @@ var processFeed = function(sourceId, url, callback) {
         posts.findOne({url: doc.url}, function(err, existingDoc){
           if(!existingDoc){
             w.info('Creating post ', doc.url, '...');
+            doc._id = shortid();
             posts.insert(doc, {}, callback);
           }
           else {
