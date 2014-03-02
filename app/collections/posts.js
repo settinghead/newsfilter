@@ -20,6 +20,8 @@ Posts.allow({
   , remove: canEditById
 });
 
+Posts.allowTags(canPostById);
+
 clickedPosts = [];
 
 Meteor.methods({
