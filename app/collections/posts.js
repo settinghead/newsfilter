@@ -1,4 +1,5 @@
 Posts = new Meteor.Collection('posts');
+Tags.TagsMixin(Posts);
 
 STATUS_PENDING=1;
 STATUS_APPROVED=2;

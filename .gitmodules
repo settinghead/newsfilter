@@ -1,3 +1,6 @@
 [submodule "app/packages/kue"]
 	path = app/packages/kue
 	url = https://github.com/settinghead/kue-meteor
+[submodule "app/packages/tags"]
+	path = app/packages/tags
+	url = git@github.com:settinghead/meteor-tags.git

@@ -16,6 +16,9 @@
     },
     "kue": {
       "path": "packages/kue"
+    },
+    "tags": {
+      "path": "packages/tags"
     }
   }
 }

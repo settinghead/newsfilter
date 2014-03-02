@@ -11,7 +11,7 @@ if(Meteor.isServer) {
       }).save();
     },
     'feed/queueFeedUrl' : function(sourceId, url) {
-      w.info('Job added to feed/queueFeedUrl, source id = ', sourceId, ', url = ', url);
+      w.info('Job added to feed/queueFeedUrl, source id =', sourceId, ', url =', url);
       jobs.create('newsfilter/feed', {
         sourceId: sourceId,
         url: url
