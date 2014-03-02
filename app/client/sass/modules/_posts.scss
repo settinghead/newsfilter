@@ -304,3 +304,20 @@
 		@include border-radius(3px);
 	}
 }
+
+
+.post-tags-list {
+  list-style: none;
+}
+
+.post-tag-list li {
+  display: inline-block;
+}
+
+.post-tag-list .btn-group {
+  display: inline-block;
+}
+
+.post-tag-list button {
+  display: inline-block;
+}
